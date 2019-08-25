@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>This is calculation template</h3>
+
+<!-- <form>
+	{{ form.as_p }}
+	<input type="submit" value="Calculate" />
+</form> -->
+
+<!-- <form action="/your-name/" method="post"> -->
+<form action="calculation/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+
+{% endblock %}
