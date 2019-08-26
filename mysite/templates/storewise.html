@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <title>Payzant - Storewise</title>
+{% endblock head %}
+
+{% block body %}
+  <form method="POST">{% csrf_token %}
+	Store number: <input type="text" name="storenumber"><br>
+	Date: <input type="text" name="date"><br>
+    <input type="submit" value="Go!" />
+  </form>
+{% endblock body %}

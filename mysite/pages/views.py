@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from payzant.forms import InputForm, ItemForm
-from payzant.views import prediction, remove_outlier, getQuantity, getFact
+from payzant.forms import InputForm
+from payzant.views import prediction, remove_outlier, getQuantity, getFact, getItems
 
 from django.views.generic import View
 
@@ -74,11 +74,6 @@ def input_view(request, *args, **kwargs):
         storenumber = request.POST.get('storenumber')
         itemnumber = request.POST.get('itemnumber')
         date = request.POST.get('date')
-        print('////////////////') 
-        print(request.GET)
-        print(request.POST)
-        print(request)
-        print('////////////////') 
         prdct = prediction(storenumber, itemnumber, date)
         context = {
             'prediction' : prdct
@@ -113,4 +108,15 @@ def input_view(request, *args, **kwargs):
 
 #     return render(request, 'input.html', {'form': form})
 
-
+# Html Form of storewise.html
+def storewise_view(request, *args, **kwargs):
+    if request.method == 'POST': # get rid of first load when GET is default and POST is None
+        storenumber = request.POST.get('storenumber')
+        date = request.POST.get('date')
+        items = getItems(storenumber, date)
+        context = {
+            'items' : items
+        }
+        return render(request, 'storewiseout.html', context)
+    form = None
+    return render(request, 'storewise.html', {'form':form})

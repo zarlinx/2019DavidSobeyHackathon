@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from math import sqrt
 
-from .models import DbSalesDetailCustomerType, TblAllStoresHardlines
+from .models import DbSalesDetailCustomerType, DbItemByStore
 
 import pandas as pd
 import itertools
@@ -23,18 +23,24 @@ def remove_outlier(df_in, col_name):
     return df_out
 
 def getFact(storenumber, itemnumber):
-    qs = TblAllStoresHardlines.objects.filter(item_number=itemnumber).filter(
+    qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
         store=storenumber)
     price = qs[0].retail_price
     demand = qs[0].forecast_demand_per_day
     return price*demand
 
 def getQuantity(storenumber, itemnumber, demand):
-    qs = TblAllStoresHardlines.objects.filter(item_number=itemnumber).filter(
+    qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
         store=storenumber)
     k = qs[0].replacement_cost*qs[0].qoh
     h = qs[0].average_cost
     return sqrt(2*demand*k/h)
+
+def getItems(storenumber, date):
+    qs = DbItemByStore.objects.filter(store=storenumber).filter(
+        'qoh' < 'new_order_point').order_by('netsales2018')
+    return qs
+
 
 def prediction(storenumber, itemnumber, date):
     qs = DbSalesDetailCustomerType.objects.filter(itemnumber=itemnumber).filter(
