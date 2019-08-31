@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load mathfilters %}
 
 {% block head %}
   <title>Payzant - StorewiseOutput</title>
@@ -6,7 +7,17 @@
 
 {% block body %}
 <ul>
-	{% for item in {{ items }} %}
-	<li>{{ item }}</li>
+	Store | Item | Description | New Order Point | Quantity On Hand | Risk Of Outstock<br> 
+	{% for item in  items  %}
+	    <li>{{item.store}} | {{item.item_number}} | {{item.itemdescription}} | {{item.new_order_point}} | {{item.qoh}} | 
+        {% if item.qoh|div:item.new_order_point > 0.8 %}
+        LOW
+        {% elif item.qoh|div:item.new_order_point > 0.5 %}
+        MEDIUN
+        {% else %}
+        HIGH
+        {% endif %}
+	     | <a href="{% url 'index' %}">expand</a></li>
+   	{% endfor %}
 </ul>
-{% endblock body%}
+{% endblock body %}

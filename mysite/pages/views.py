@@ -115,8 +115,10 @@ def storewise_view(request, *args, **kwargs):
         date = request.POST.get('date')
         items = getItems(storenumber, date)
         context = {
-            'items' : items
+            'items' : items,
         }
         return render(request, 'storewiseout.html', context)
     form = None
     return render(request, 'storewise.html', {'form':form})
+
+

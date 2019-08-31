@@ -11,8 +11,8 @@ from django.db import models
 class DbItemByStore(models.Model):
     store = models.TextField(db_column='Store')  # Field name made lowercase.
     item_number = models.TextField(db_column='Item_Number')  # Field name made lowercase.
-    new_order_point = models.FloatField(db_column='New_Order_Point', blank=True, null=True)  # Field name made lowercase.
-    qoh = models.FloatField(db_column='QOH', blank=True, null=True)  # Field name made lowercase.
+    new_order_point = models.IntegerField(db_column='New_Order_Point', blank=True, null=True,)  # Field name made lowercase.
+    qoh = models.IntegerField(db_column='QOH', blank=True, null=True)  # Field name made lowercase.
     retail_price = models.FloatField(db_column='Retail_Price', blank=True, null=True)  # Field name made lowercase.
     average_cost = models.FloatField(db_column='Average_Cost', blank=True, null=True)  # Field name made lowercase.
     replacement_cost = models.FloatField(db_column='Replacement_Cost', blank=True, null=True)  # Field name made lowercase.

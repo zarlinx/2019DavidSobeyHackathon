@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #own
+    # own
     'payzant.apps.PayzantConfig',
     'pages.apps.PagesConfig',
+
+    # 3-p
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +128,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = "payzant/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'payzant/static/')

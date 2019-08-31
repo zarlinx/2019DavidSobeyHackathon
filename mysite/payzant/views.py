@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db.models import F
 from math import sqrt
 
 from .models import DbSalesDetailCustomerType, DbItemByStore
@@ -38,7 +39,9 @@ def getQuantity(storenumber, itemnumber, demand):
 
 def getItems(storenumber, date):
     qs = DbItemByStore.objects.filter(store=storenumber).filter(
-        'qoh' < 'new_order_point').order_by('netsales2018')
+        new_order_point__gt=F('qoh')).order_by('-netsales2018','-netsales2017',
+                                               '-netsales2016','-netsales2015',
+                                               '-netsales2014')
     return qs
 
 
