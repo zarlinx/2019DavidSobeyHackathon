@@ -5,9 +5,143 @@
 {% endblock head %}
 
 {% block body %}
-  <form method="POST">{% csrf_token %}
-	Store number: <input type="text" name="storenumber"><br>
-	Date: <input type="text" name="date"><br>
-    <input type="submit" value="Go!" />
-  </form>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand-xl navbar-light bg-white topbar mb-10 static-top shadow" style="height: auto">
+
+        <!-- Topbar Search -->
+          <form class="form-control-md" method="POST">{% csrf_token %}
+            <div class="container">
+              
+              <div class="row">
+                <div class="col-auto">
+                  <div class="dropdown mr-4">
+                    <font size="5px">Store:</font>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="btn btn-primary">
+                    <select name="storenumber" aria-controls="dataTable" class="btn btn-primary dropdown-toggle">
+                      <option class="card mb-4 py-3 border-bottom-primary  text-gray-900 p-3 m-0" value=1>Sackville</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value=2>Burnside</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value=3>NB</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value=4>Porters Lake</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value=5>Enfield</option>
+                    </select>
+                  </div>
+                </div>  
+            </div>
+            <br>	
+
+            <div class="row">
+              <div class="col-auto">
+                  <div class="dropdown mr-4">
+                    <font size="5px">Date:</font>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <input type="Date" class="btn btn-primary">
+                </div>
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <div class="col-sm">
+                  <div class="dropdown">
+
+                  
+                </div>
+              </div>
+            </div>
+
+<!--             <div class="row">
+              <div class="col-auto">
+                  <div class="dropdown mb-4">
+                    <font size="5px">Fineline:</font>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="dropdown mb-4">
+                    <select name="dataTable_length" aria-controls="dataTable" class="btn btn-primary dropdown-toggle">
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">10293: HOME & SCHOOL SUPPLI</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">008403: UNKNOWN</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">1298371: HANGERS- PICTUR&PLAT</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">123123: PNEUMATIC TOOL&ACCES</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-auto">
+                  <div class="dropdown mr-4">
+                    <font size="5px">Store:</font>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="dropdown mb-4">
+                    <select name="dataTable_length" aria-controls="dataTable" class="btn btn-primary dropdown-toggle">
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">1: SACKVILLE</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">2: BURNSIDE</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">3: NB</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">4: PORTERS LAKE</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">5: ENFIELD</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-auto">
+                  <div class="dropdown mb-4">
+                    <font size="5px">Item:</font>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="dropdown">
+                    <select name="dataTable_length" aria-controls="dataTable" class="btn btn-primary dropdown-toggle">
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">1078505001: 3/4 X 9 X 12' MDF</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">1078505002: 1/2 X 1 1/8 X 12' BULLNOSE MDF</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">1093375002: "1 3/4 X 14"" LVL 20'"</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="10">1410102009: 2 X 10 X 10 ROUGH SAWN STAMPED</option>
+                    </select>
+                  </div>
+                </div>
+            </div> -->
+
+            
+
+            <div class="row mr-2">
+              <div class="col-auto">
+              	<br>
+               
+            <input  class="mb-4 btn btn-primary" type="submit" value="Go!" />
+            <br>
+                * Assuming Lead Time to be 0(zero)
+
+                
+     
+              </div>
+
+            </div>
+            
+
+            </div>
+
+          </form>
+
+          
+
+        </nav>
+
+        <div class="container-fluid">
+          <div class="mb-4">
+          </div>
+
+          <h1 class="h3 mb-2 text-gray-800">Store-Wise Products</h1>
+          <p class="mb-4">This gives us an overview of all the products with the selected store with their respective Risk Score.</p>
+
+        <!-- End of Topbar -->
 {% endblock body %}

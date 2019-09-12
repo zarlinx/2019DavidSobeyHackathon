@@ -2,11 +2,39 @@
 {% load mathfilters %}
 
 {% block head %}
-  <title>Payzant - StorewiseOutput</title>
+  <title>Payzant - Tables</title>
+
+<script type="text/javascript">
+  
+  function genPDF() {
+  
+   html2canvas(document.getElementById("content")).then(function(canvas) {
+                var img = canvas.toDataURL('image/png', 1.0);
+                var doc = new jsPDF("p", "mm", "a3");
+     
+
+
+        var specialEventHandlers = {
+          '#hidediv' : function(element,render) {return true;}
+        };
+        
+        var width = doc.internal.pageSize.getWidth();
+        var height = doc.internal.pageSize.getHeight();
+        
+                doc.addImage(img, 'JPEG', 0, 2, width, height);
+        
+                doc.save('Report.pdf');
+
+
+            });
+  }
+  
+  </script>
+
 {% endblock head %}
 
 {% block body %}
-<ul>
+<!-- <ul>
 	Store | Item | Description | New Order Point | Quantity On Hand | Risk Of Outstock<br> 
 	{% for item in  items  %}
 	    <li>{{item.store}} | {{item.item_number}} | {{item.itemdescription}} | {{item.new_order_point}} | {{item.qoh}} | 
@@ -17,7 +45,144 @@
         {% else %}
         HIGH
         {% endif %}
-	     | <a href="{% url 'index' %}">expand</a></li>
+	     | <a href='http://localhost:8000/input/?storenumber={{item.store}}&itemnumber={{item.item_number}}&date=2019-03-14'>expand</a></li>
    	{% endfor %}
-</ul>
+</ul> -->
+
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content" >
+
+    
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+
+<div class="mb-4">
+          </div>
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Store-wise Products</h1>
+          <p class="mb-4">This Page summarizes the list of products with each store and displays a tabular view of Products with their respective Risk Score. It gives you an option to expand an individual product also.</p>
+
+
+<div class="d-sm-flex align-items-right justify-content-between mb-4" align="right">
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>-->
+
+            <a href="http://localhost:8000/csvStore/?storenumber={{items.0.store}}&date=2019-03-14" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          </div>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">All products which need to be ordered</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+            <tr>
+            <th>Store</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>New Order Point</th>
+            <th>Quantity at Hand</th>
+            <th>Risk of OutStock</th>
+            </tr>
+         </thead>
+         <tfoot>
+            <tr>
+            <th>Store</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>New Order Point</th>
+            <th>Quantity at Hand</th>
+            <th>Risk of OutStock</th>
+            </tr>
+         </tfoot>
+        {% for item in  items  %}
+          <tbody>
+            <tr>
+            <td>{{item.store}}</td>
+            <td>{{item.item_number}}</td>
+            <td>{{item.itemdescription}}</td>
+            <td>{{item.new_order_point}}</td>
+            <td>{{item.qoh}}</td>
+            <td> {% if item.qoh|div:item.new_order_point > 0.8 %}
+                <font color='green'>Low</font>
+               {% elif item.qoh|div:item.new_order_point > 0.5 %}
+                <font color=#FFFF00>Mediun</font>
+               {% else %}
+                <font color='red'>High</font>
+               {% endif %}
+            </td>
+            <td><a href='http://localhost:8000/input/?storenumber={{item.store}}&itemnumber={{item.item_number}}&date=2019-03-14'>Expand</a></td>
+            </tr>
+            
+          </tbody>
+        {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="d-sm-flex align-items-right justify-content-between mb-4" align="right">
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>-->
+  
+
+            <a href="http://localhost:8000/csvStore/?rows={{rows}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Payzant 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
 {% endblock body %}

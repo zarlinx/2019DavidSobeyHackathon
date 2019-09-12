@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use("Agg")
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import F
@@ -8,10 +11,13 @@ from .models import DbSalesDetailCustomerType, DbItemByStore
 import pandas as pd
 import itertools
 import statsmodels.api as sm
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 #from pylab import rcParams
 
 def index(request):
-    return HttpResponse("Hello, Payzant! You're at the inventory management index.")
+    return HttpResponse("Just a test!")
 
 def remove_outlier(df_in, col_name):
     threshold = 3
@@ -22,6 +28,36 @@ def remove_outlier(df_in, col_name):
     fence_high = q3+threshold*iqr
     df_out = df_in.loc[(df_in[col_name] > fence_low) & (df_in[col_name] < fence_high)]
     return df_out
+
+def getClassName(storenumber, itemnumber):
+    qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
+        store=storenumber)
+    className = qs[0].classname
+    return className
+
+def getFinelineName(storenumber, itemnumber):
+    qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
+        store=storenumber)
+    finelineName = qs[0].finelinename
+    return finelineName
+
+def getClassCode(storenumber, itemnumber):
+    qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
+        store=storenumber)
+    classCode = qs[0].classcode
+    return classCode
+
+def getFinelineCode(storenumber, itemnumber):
+    qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
+        store=storenumber)
+    finelineCode = qs[0].finelinecode
+    return finelineCode
+
+def getDescription(storenumber, itemnumber):
+    qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
+        store=storenumber)
+    description = qs[0].itemdescription
+    return description
 
 def getFact(storenumber, itemnumber):
     qs = DbItemByStore.objects.filter(item_number=itemnumber).filter(
@@ -44,6 +80,30 @@ def getItems(storenumber, date):
                                                '-netsales2014')
     return qs
 
+def getFig1(storenumber, itemnumber, date):
+    qs = DbSalesDetailCustomerType.objects.filter(itemnumber=itemnumber).filter(
+        storenumber=storenumber).values_list('date', 'sales')
+    df = pd.DataFrame.from_records(qs)
+    df.columns = ['Date', 'Sales']
+
+    df['Date'] = pd.to_datetime(df['Date'])
+    dt = pd.to_datetime(date)
+
+    df = df.sort_values('Date')
+    #df.isnull().sum()
+    df = df.groupby('Date')['Sales'].sum().reset_index()
+    df = df.set_index('Date')
+
+    #Our current datetime data can be tricky to work with, therefore, we will use the averages daily sales value for that month instead, and we are using the start of each month as the timestamp.
+    y = df['Sales'].resample('MS').mean()
+    y.plot(figsize=(15, 6))
+
+    buf = BytesIO()
+    plt.savefig(buf, format='png', dpi=300)
+    image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+    buf.close()    
+
+    return image_base64
 
 def prediction(storenumber, itemnumber, date):
     qs = DbSalesDetailCustomerType.objects.filter(itemnumber=itemnumber).filter(
@@ -172,18 +232,24 @@ def prediction(storenumber, itemnumber, date):
     # print('The Root Mean Squared Error of our forecasts is {}'.format(round(np.sqrt(mse), 2)))
 
     pred_uc = results.get_forecast(steps=12)
-    # pred_ci = pred_uc.conf_int()
-    # ax = y.plot(label='observed', figsize=(14, 7))
-    # pred_uc.predicted_mean.plot(ax=ax, label='Forecast')
-    # ax.fill_between(pred_ci.index,
-    #             pred_ci.iloc[:, 0],
-    #             pred_ci.iloc[:, 1], color='k', alpha=.25)
-    # ax.set_xlabel('Date')
-    # ax.set_ylabel('Paint Sales')
-    # plt.legend()
-    # plt.show()
+    pred_ci = pred_uc.conf_int()
+    fig = plt.figure()
+    ax = y.plot(label='Observed', figsize=(14, 7))
+    pred_uc.predicted_mean.plot(ax=ax, label='Predicted')
+    ax.fill_between(pred_ci.index,
+                pred_ci.iloc[:, 0],
+                pred_ci.iloc[:, 1], color='k', alpha=.25)
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Sales')
+    plt.legend()
+    plt.show()
+    buf = BytesIO()
+    fig.savefig(buf, format='png', dpi=300)
+    image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+    buf.close()
 
     yf=pred_uc.predicted_mean
+    predictedValue = yf[dt.month-1]
     #print(yf)
     # yf = 123.753
     #yo=3.1*39.99
@@ -195,6 +261,6 @@ def prediction(storenumber, itemnumber, date):
 
 
     #return HttpResponse("You're looking at item %s. It's start date is %s, end date is %s" % (itemnumber, start_date, end_date))
-    return yf[dt.month-1]
+    return image_base64, predictedValue
     #return HttpResponse("Testing...")
 

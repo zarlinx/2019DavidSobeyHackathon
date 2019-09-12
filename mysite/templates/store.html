@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+
+
+{% block head %}
+  <title>Payzant - Store</title>
+
+  <script type="text/javascript">
+function load(){
+ 
+    var e=document.getElementById("location").value;
+    var e1= document.getElementById("test1id");
+    var e2= document.getElementById("test2id");
+    var e3= document.getElementById("test3id");
+    var e4= document.getElementById("test4id");
+    var e5= document.getElementById("test5id");
+    var e6= document.getElementById("testh");
+
+    
+    switch(e) {
+    case '1':
+        e2.style.display="none";
+        e3.style.display="none";
+        e4.style.display="none";
+        e5.style.display="none";
+        e6.style.display="";
+        e1.style.display="";
+        break;
+    case '2':
+        e1.style.display="none";
+        e3.style.display="none";
+        e4.style.display="none";
+        e5.style.display="none";
+        e6.style.display="";
+        e2.style.display="";
+        break;
+    case '3':
+        e2.style.display="none";
+        e1.style.display="none";
+        e4.style.display="none";
+        e5.style.display="none";
+        e6.style.display="";
+        e3.style.display="";
+        break;
+    case '4':
+        e2.style.display="none";
+        e3.style.display="none";
+        e1.style.display="none";
+        e5.style.display="none";
+        e6.style.display="";
+        e4.style.display="";
+        break;
+    case '5':
+        e2.style.display="none";
+        e3.style.display="none";
+        e4.style.display="none";
+        e1.style.display="none";
+        e6.style.display="";
+        e5.style.display="";
+        break;
+
+  default:
+        // code block
+    }
+}
+
+</script>
+
+{% endblock head %}
+
+
+{% block body %}
+
+
+
+
+   
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand-xl navbar-light bg-white topbar mb-10 static-top shadow" style="height: auto">
+
+         
+
+          <!-- Topbar Search -->
+          <form class="form-control-md" >
+            <div class="container">
+              
+
+           
+
+            <div class="row">
+              <div class="col-auto">
+                  <div class="dropdown">
+                    <font size="5px">Store:</font>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <div class="btn btn-primary">
+                    <select name="dataTable_length" aria-controls="dataTable" class="btn btn-primary dropdown-toggle" id="location">
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="1">Sackville</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="2">Burnside</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="3">NB</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="4">Porters Lake</option>
+                      <option class="card mb-4 py-3 border-bottom-primary text-gray-900 p-3 m-0" value="5">Enfield</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <div class="col-sm">
+                  <div class="dropdown">
+
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" onclick="load()">
+                      <i class="fas fa-search fa-sm">Go</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            </div>
+          </form>
+
+          
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <div class="mb-4">
+          </div>
+
+<!-- Page Heading -->
+          <!--<div class="d-sm-flex align-items-right justify-content-between mb-4" align="right">
+            <a href="javascript:genPDF()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          </div>-->
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Store Details</h1>
+          <p class="mb-4">This Summarises the yearly sales of Classes for each store from 2014-2018.</p>
+
+          <font size="1">Click on the bottom right corner of the result to download the Interactive Page.</p>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <div class="col-xl-8 col-lg-7">
+
+              <!-- Area Chart -->
+              <div class="card-header py-3" style="display: none;" id="testh">
+                  <h6 class="m-0 font-weight-bold text-primary">Mining Chart</h6>
+                </div>
+                    <div id="test1id" style="display: none; transform: scale(0.65);transform-origin: top left;" class="content">
+                      <div class='tableauPlaceholder' id='viz1565383559783' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sa&#47;Sackville&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Sackville&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sa&#47;Sackville&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1565383559783');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                      </div>
+
+                      <div id="test2id" style="display: none; transform: scale(0.65);transform-origin: top left;" >
+                      <div class='tableauPlaceholder' id='viz1565383587507' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bu&#47;Burnside&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Burnside&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bu&#47;Burnside&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1565383587507');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                      </div>
+
+                      <div id="test3id" style="display: none; transform: scale(0.65);transform-origin: top left;" >
+                         <div class='tableauPlaceholder' id='viz1565383604028' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;NB&#47;NB_15653828233500&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='NB_15653828233500&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;NB&#47;NB_15653828233500&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1565383604028');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                          </div>
+
+                          <div id="test4id" style="display: none; transform: scale(0.65);transform-origin: top left;" >
+                              <div class='tableauPlaceholder' id='viz1565383624391' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Po&#47;PortersLake&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='PortersLake&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Po&#47;PortersLake&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1565383624391');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                          </div>
+                          <div id="test5id" style="display: none; transform: scale(0.65);transform-origin: top left;" >
+                          <div class='tableauPlaceholder' id='viz1565383638610' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;Enfield&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Enfield&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;Enfield&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1565383638610');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                          </div>
+
+
+             
+              
+
+              
+
+
+            
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+
+
+  
+ 
+
+  
+
+
+{% endblock body %}

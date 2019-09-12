@@ -15,16 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from pages.views import home_view, index_view, input_view, storewise_view
+from pages.views import index_view, input_view, storewise_view, store_view, class_view, csvStore_view, csvProduct_view
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', home_view, name='home'),
+    path('', index_view, name='index'),
     path('admin/', admin.site.urls),
     path('index/', index_view, name='index'),
     path('input/', input_view, name='input'),
     path('storewise/', storewise_view, name='storewise'),
-    path('payzant/', include('payzant.urls')),
+    #path('payzant/', include('payzant.urls')),
+    path('class/',class_view, name='class'),
+    path('store/', store_view, name='store'),
+    #path('dashboard/', dashboard_view, name='dashboard'),
+    path('csvStore/', csvStore_view, name='csvStore'),
+    path('csvProduct/', csvProduct_view, name='csvProduct'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

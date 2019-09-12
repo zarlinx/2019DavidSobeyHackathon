@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Payzant - Class</title>
+
+    <style>
+::-webkit-input-placeholder { /* Edge */
+  color: red;
+}
+
+:-ms-input-placeholder { /* Internet Explorer */
+  color: red;
+}
+
+::placeholder {
+  color: white;
+}
+</style>
+{% endblock head %}
+
+{% block body %}
+
+ 
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      	<div id="content">
+
+        <!-- Topbar -->
+        		<nav class="navbar navbar-expand-xl navbar-light bg-white topbar mb-10 static-top shadow" style="height: auto">
+
+    				<form class="form-control-md"  method="POST">{% csrf_token %}
+
+    	 				<div class="container">
+ 							<div class="row">
+              					<div class="col-auto">
+                  					<div class="dropdown"><font size="5px">
+	    								Store Number:
+															</font>
+									</div>
+
+								</div>
+								<div class="col-auto">
+										<input type="text" name="storenumber" class=" btn btn-primary"
+										placeholder="Type Store Number" >
+
+									
+								</div>
+							</div>
+
+
+							<br>
+							<div class="row">
+              					<div class="col-auto">
+                  					<div class="dropdown"><font size="5px">
+	   
+
+
+	    								Item Number: 
+	    								</font>
+									</div>
+
+								</div>
+								<div class="col-auto ml-2">
+                  					
+
+	    								<input type="text" name="itemnumber"
+class="btn btn-primary"
+										placeholder="Type Item Number" 
+										placeholder-color="white" >
+
+
+
+								</div>
+							</div>
+							<br>
+
+							<div class="row">
+              					<div class="col-auto">
+                  					<div class="dropdown mr-5"><font size="5px">
+
+
+	    								Date: 
+
+	    							</font>
+									</div>
+
+								</div>
+								<div class="col-auto ml-5">
+                  					
+
+	    								<input type="date" name="date"
+
+	    								class="btn btn-primary"
+										placeholder="Type Store Number" >
+
+	    								
+								</div>
+							</div>
+
+
+							<br>
+
+							<div class="input-group-append">
+
+
+        						<input type="submit" value="Go!" class="btn btn-primary" />
+    						</div>
+    						</div>
+
+
+    </form>
+</nav>
+
+
+<div class="container-fluid">
+          <div class="mb-4">
+          </div>
+
+          <h1 class="h3 mb-2 text-gray-800">Individual Product</h1>
+          <p class="mb-4">This page gives detailed Information for each product belonging to a specific store for a specific date.</p>
+
+          </div>
+</div>
+{% endblock body %}
